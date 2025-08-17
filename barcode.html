@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f4f4f4;
+        }
+
+        input,
+        button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            box-shadow: 20px black;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="background-color: red;"><marquee behavior="" direction="">QR Code & BarCode Generator</marquee></h1>
+    <input type="text" name="" id="text" placeholder="Enter Name">
+    <button onclick="generateCode()">Generate</button><br><br>
+
+    <center><div id="qrcode"></div></center><br><br>
+    <svg id="barcode"></svg>
+
+
+    <!-- QR Code library -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- Bar Code library -->
+
+    <script src="
+https://cdn.jsdelivr.net/npm/jsbarcode@3.12.1/dist/JsBarcode.all.min.js
+"></script>
+    <script>
+        function generateCode() {
+            const name = document.getElementById("text").value;
+            document.getElementById("qrcode").innerHTML = ""
+
+            //generate qrcode---
+
+            new QRCode(document.getElementById("qrcode"), {
+                text: name,
+                width: 200,
+                height: 200
+            });
+
+            //generate barcode-------------
+
+            JsBarcode("#barcode", name, {
+                format: "CODE128",
+                lineColor: "#000",
+                width: 2,
+                height: 60,
+                displayValue: true
+            })
+
+        }
+    </script>
+
+</body>
+
+</html>
